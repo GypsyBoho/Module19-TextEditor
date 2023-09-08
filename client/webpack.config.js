@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
+
 const path = require('path');
 const { InjectManifest } = require('workbox-webpack-plugin');
 
@@ -21,7 +22,7 @@ module.exports = () => {
       // generates html page and all necessary links
       new HtmlWebpackPlugin({
         template: './index.html',
-        title: 'Contact Cards',
+        title: 'Text-Editor',
       }),
       // injects custom service worker
       new InjectManifest({
@@ -55,7 +56,11 @@ module.exports = () => {
         {
           test: /\.css$/i,
           use: ['style-loader', 'css-loader'],
-          use: {
+        },
+        {
+        test: /.m?js$/,
+        exclude: /node_modules/,
+        use: {
             loader: 'babel-loader',
             options: {
               presets: ['@babel/preset-env'],
